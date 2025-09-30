@@ -1,11 +1,6 @@
 <template>
   <q-page class="row items-center justify-evenly">
-    <example-component
-      title="Example component"
-      active
-      :todos="todos"
-      :meta="meta"
-    ></example-component>
+    <example-component title="Example component" active :todos="todos" :meta="meta"></example-component>
   </q-page>
 </template>
 
@@ -17,7 +12,7 @@ import ExampleComponent from 'components/ExampleComponent.vue';
 const todos = ref<Todo[]>([
   {
     id: 1,
-    content: 'ct1',
+    content: 'ct12',
   },
   {
     id: 2,

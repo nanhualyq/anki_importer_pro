@@ -50,14 +50,21 @@ export default defineConfig((/* ctx */) => {
 
       // rebuildCache: true, // rebuilds Vite/linter/etc cache on startup
 
-      // publicPath: '/',
+      publicPath: './',
       // analyze: true,
       // env: {},
       // rawDefine: {}
       // ignorePublicFolder: true,
       // minify: false,
       // polyfillModulePreload: true,
-      // distDir
+      distDir: 'anki_plugin/web',
+      extendViteConf(viteConf) {
+        viteConf.base = './';
+        // 修改 vite 的 build 配置
+        viteConf.build = Object.assign({}, viteConf.build, {
+          assetsDir: '', // 去掉默认的 assets 子目录
+        });
+      },
 
       // extendViteConf (viteConf) {},
       // viteVuePluginOptions: {},

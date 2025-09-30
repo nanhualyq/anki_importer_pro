@@ -41,3 +41,13 @@ quasar build
 ### Customize the configuration
 
 See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-js).
+
+## anki plugin
+
+```bash
+ln -s $PWD/anki_plugin/ ~/.local/share/Anki2/addons21/importer_pro
+```
+
+```bash
+anki -p manong --debug
+```
