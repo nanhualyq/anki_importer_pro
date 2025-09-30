@@ -1,5 +1,6 @@
 import sys
 from aqt import QDialog, QUrl, QVBoxLayout, mw
+from aqt.utils import showInfo
 from aqt.webview import AnkiWebView
 
 ADDON_PACKAGE_NAME = mw.addonManager.addonFromModule(__name__)  # 假设在同一个插件模块中
@@ -17,12 +18,23 @@ if "--debug" in sys.argv:
 class ImporterForm(QDialog):
     def __init__(self):
         super().__init__()
-        layout = QVBoxLayout()
-        self.webview = AnkiWebView(self)
-        self.webview.set_open_links_externally(False)
-        self.webview.load_url(QUrl(html_url))
-        layout.addWidget(self.webview)
-        self.setLayout(layout)
+
         self.setGeometry(100, 100, 800, 600)
         self.setWindowTitle("ImporterPro")
+
+        layout = QVBoxLayout()
+        self.set_webview()
+        layout.addWidget(self.webview)
+        self.setLayout(layout)
+
         self.exec()
+
+    def set_webview(self):
+        self.webview = AnkiWebView(self)
+        self.webview.set_bridge_command(self._on_bridge_cmd, self)
+        self.webview.set_open_links_externally(False)
+        self.webview.load_url(QUrl(html_url))
+
+    def _on_bridge_cmd(self, cmd: str):
+        print(cmd)
+        showInfo(cmd)
