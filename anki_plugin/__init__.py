@@ -8,4 +8,4 @@ action = QAction("ImporterPro", mw)
 # set it to call testFunction when it's clicked
 qconnect(action.triggered, ImporterForm)
 # and add it to the tools menu
-mw.form.menuTools.addAction(action)
+mw.form.menuCol.addAction(action)
