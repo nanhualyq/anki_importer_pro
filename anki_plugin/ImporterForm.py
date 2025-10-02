@@ -1,7 +1,9 @@
+import json
 import sys
-from aqt import QDialog, QUrl, QVBoxLayout, mw
-from aqt.utils import showInfo
+from aqt import QDialog, QUrl, QVBoxLayout, gui_hooks, mw
 from aqt.webview import AnkiWebView
+from anki.notes import Note
+from anki.collection import AddNoteRequest
 
 ADDON_PACKAGE_NAME = mw.addonManager.addonFromModule(__name__)  # 假设在同一个插件模块中
 
@@ -36,5 +38,24 @@ class ImporterForm(QDialog):
         self.webview.load_url(QUrl(html_url))
 
     def _on_bridge_cmd(self, cmd: str):
-        print(cmd)
-        showInfo(cmd)
+        if cmd == "getDecks":
+            return [
+                {"id": x.id, "name": x.name}
+                for x in mw.col.decks.all_names_and_ids(include_filtered=False)
+            ]
+        elif cmd == "getNotetypes":
+            return mw.col.models.all()
+        elif cmd == "save":
+            self.webview.evalWithCallback("window._data", self.handleSave)
+
+    def handleSave(self, data):
+        requests = []
+        for item in data["notes"]:
+            note = Note(mw.col, int(data["notetypeId"]))
+            for key, val in item.items():
+                note[key] = val
+            requests.append(AddNoteRequest(note, int(data["deckId"])))
+        changes = mw.col.add_notes(requests)
+        gui_hooks.operation_did_execute(changes, None)
+        js_code = f'onPythonMessage("onNotesCreated", {json.dumps([r.note.id for r in requests])})'
+        self.webview.eval(js_code)
