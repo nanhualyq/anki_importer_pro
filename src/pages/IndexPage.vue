@@ -19,9 +19,12 @@
             <q-btn icon="auto_fix_high" flat>
               <q-menu>
                 <q-list>
-                  <q-item clickable v-close-popup v-for="item in quickFieldList" :key="item.value"
+                  <q-item clickable v-close-popup v-for="item in quickFieldListFull" :key="item.value"
                     @click="formData.fields[name] = (formData.fields[name] ? formData.fields[name] + ' ' : '') + item.value">
-                    <q-item-section>{{ item.label }}</q-item-section>
+                    <q-item-section>
+                      <q-item-label>{{ item.label }}</q-item-label>
+                      <q-item-label>{{ convertField(0, item.value) }}</q-item-label>
+                    </q-item-section>
                   </q-item>
                 </q-list>
               </q-menu>
@@ -101,11 +104,21 @@ const linesWithColumns = computed(() => {
   })
 })
 
+
+const quickFieldListFull = computed(() => {
+  const columns = linesWithColumns.value[0]?.map((_v, i) => ({
+    label: `Column ${i + 1}`,
+    value: `\${line[${i}]}`,
+  }))
+  return columns?.concat(quickFieldList)
+})
+
 function convertField(row = 0, input: string) {
   try {
     const compiled = template(input?.replace(/\n/g, '<br>'), {
       imports: {
-        lines: linesWithColumns.value
+        lines: linesWithColumns.value,
+        line: linesWithColumns.value[row]
       }
     })
     return compiled({ row })

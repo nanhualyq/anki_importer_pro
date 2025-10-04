@@ -4,7 +4,7 @@ from aqt import QAction, mw, qconnect
 from .ImporterForm import ImporterForm
 
 
-action = QAction("ImporterPro", mw)
+action = QAction("Importer Pro", mw)
 # set it to call testFunction when it's clicked
 qconnect(action.triggered, ImporterForm)
 # and add it to the tools menu

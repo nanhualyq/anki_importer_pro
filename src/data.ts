@@ -42,14 +42,6 @@ export const notetypeList = [
 
 export const quickFieldList = [
   {
-    label: 'column 1',
-    value: '${lines[row][0]}',
-  },
-  {
-    label: 'column 2',
-    value: '${lines[row][1]}',
-  },
-  {
     label: 'column 1 of prev line',
     value: '${lines[row - 1]?.[0]}',
   },
