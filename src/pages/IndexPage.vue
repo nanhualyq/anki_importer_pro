@@ -93,7 +93,11 @@ function onNotesCreated(e: CustomEvent) {
   })
 }
 
-const lines = computed<string[]>(() => (formData.value?.inputText || '').split('\n'))
+const lines = computed<string[]>(() => {
+  return (formData.value?.inputText as string || '')
+    .split('\n')
+    .filter(line => line.trim())
+})
 const linesWithColumns = computed(() => {
   const separator = formData.value.separator;
   return lines.value.map(line => {
