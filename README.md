@@ -1,3 +1,7 @@
+<!-- demo video -->
+
+https://github.com/user-attachments/assets/e0d48783-e788-4234-9245-64ba118dc855
+
 # anki-importer-pro
 
 This is a text import plugin with functionality similar to Anki's built-in import feature, but with the following new capabilities:
