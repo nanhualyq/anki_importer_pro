@@ -1,6 +1,12 @@
 import json
-import sys
-from aqt import QDialog, QUrl, QVBoxLayout, gui_hooks, mw
+import os
+from aqt import (
+    QDialog,
+    QUrl,
+    QVBoxLayout,
+    gui_hooks,
+    mw,
+)
 from aqt.webview import AnkiWebView
 from anki.notes import Note
 from anki.collection import AddNoteRequest
@@ -13,15 +19,15 @@ mw.addonManager.setWebExports(
     r"web/.*",  # 正则表达式匹配你想要导出的文件
 )
 html_url = AnkiWebView.webBundlePath(f"/_addons/{ADDON_PACKAGE_NAME}/web/index.html")
-if "--debug" in sys.argv:
-    html_url = "http://localhost:9000/"
+if os.environ.get("DEBUG") == "1":
+    html_url = "http://localhost:5173/"
 
 
-class ImporterForm(QDialog):
+class ImporterDialog(QDialog):
     def __init__(self):
         super().__init__()
 
-        self.setGeometry(100, 100, 800, 600)
+        self.resize(800, 600)
         self.setWindowTitle("ImporterPro")
 
         layout = QVBoxLayout()

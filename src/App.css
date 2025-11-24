@@ -1,0 +1,9 @@
+textarea {
+    font-family: 'Courier New', Courier, monospace
+}
+.fill-li {
+    cursor: pointer;
+}
+.fill-li:hover {
+    background-color: #fff;
+}

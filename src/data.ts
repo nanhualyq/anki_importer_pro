@@ -1,60 +1,68 @@
+import { useEffect, useState } from "react";
+
+export const INPUT_SEPARATOR = "Input what you need";
+
 export const separatorList = [
   {
-    value: '\t',
-    label: 'Tab',
+    value: "\t",
+    label: "Tab",
   },
   {
-    value: ' ',
-    label: 'Space',
+    value: " ",
+    label: "Space",
   },
   {
-    value: ',',
-    label: 'Comma',
+    value: ",",
+    label: "Comma",
   },
   {
-    value: ';',
-    label: 'Semicolon',
+    value: ";",
+    label: "Semicolon",
   },
   {
-    value: ':',
-    label: 'Colon',
+    value: ":",
+    label: "Colon",
+  },
+  {
+    value: INPUT_SEPARATOR,
+    label: "Other",
   },
 ];
 
-export const deckList = [
+export const deckListMock = [
   {
-    name: 'Default',
+    name: "Default",
     id: 1,
   },
-];
-export const notetypeList = [
   {
-    name: 'Basic',
-    id: 1,
-    flds: [{ name: 'Front' }, { name: 'Back' }],
-  },
-  {
-    name: 'Cloze',
+    name: "Custom",
     id: 2,
-    flds: [{ name: 'Text' }, { name: 'Extra' }],
   },
 ];
 
-export const quickFieldList = [
+export const notetypeListMock = [
   {
-    label: 'column 1 of prev line',
-    value: '${lines[row - 1]?.[0]}',
+    name: "Basic",
+    id: 1,
+    flds: [{ name: "Front" }, { name: "Back" }],
   },
   {
-    label: 'column 2 of prev line',
-    value: '${lines[row - 1]?.[1]}',
-  },
-  {
-    label: 'column 1 of next line',
-    value: '${lines[row + 1]?.[0]}',
-  },
-  {
-    label: 'column 2 of next line',
-    value: '${lines[row + 1]?.[1]}',
+    name: "Cloze",
+    id: 2,
+    flds: [{ name: "Text" }, { name: "Extra" }],
   },
 ];
+
+export default function useData() {
+  const [deckList, setDeckList] = useState(deckListMock);
+  const [notetypeList, setNotetypeList] = useState(notetypeListMock);
+
+  useEffect(() => {
+    pycmd("getDecks", (res) => setDeckList(res as typeof deckListMock));
+    pycmd("getNotetypes", (res) =>
+      setNotetypeList(res as typeof notetypeListMock)
+    );
+  }, []);
+
+  return { deckList, notetypeList };
+}

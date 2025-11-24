@@ -1,11 +1,10 @@
 # create a new menu item, "test"
 from aqt import QAction, mw, qconnect
 
-from .ImporterForm import ImporterForm
-
+from .ImporterDialog import ImporterDialog
 
 action = QAction("Importer Pro", mw)
 # set it to call testFunction when it's clicked
-qconnect(action.triggered, ImporterForm)
+qconnect(action.triggered, ImporterDialog)
 # and add it to the tools menu
 mw.form.menuCol.addAction(action)
