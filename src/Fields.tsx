@@ -33,19 +33,9 @@ function Fields({
         code: `\${lines[row - 1]?.[0]}`,
       },
       {
-        label: "Column 2 of prev line",
-        text: "",
-        code: `\${lines[row - 1]?.[1]}`,
-      },
-      {
         label: "Column 1 of next line",
         text: linesWithColumns[1]?.[0],
         code: `\${lines[row + 1]?.[0]}`,
-      },
-      {
-        label: "Column 2 of next line",
-        text: linesWithColumns[1]?.[1],
-        code: `\${lines[row + 1]?.[1]}`,
       },
     ]);
 
