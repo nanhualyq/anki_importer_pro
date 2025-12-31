@@ -107,7 +107,9 @@ function Fields({
             </li>
           ))}
         </ul>
-        <button onClick={() => setFillField("")}>Close</button>
+        <button type="button" onClick={() => setFillField("")}>
+          Close
+        </button>
       </dialog>
     </>
   );
