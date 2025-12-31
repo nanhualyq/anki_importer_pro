@@ -30,6 +30,7 @@ DEBUG=1 anki -p manong
 ```
 
 ```bash
+pnpm build
 cd anki_plugin
 zip -r ../imporrt_pro.ankiaddon ./* -x ".*"
 ```
