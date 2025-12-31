@@ -24,6 +24,10 @@ export const separatorList = [
     label: "Colon",
   },
   {
+    value: "|",
+    label: "Pipe",
+  },
+  {
     value: INPUT_SEPARATOR,
     label: "Other",
   },

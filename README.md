@@ -4,6 +4,8 @@ https://github.com/user-attachments/assets/e0d48783-e788-4234-9245-64ba118dc855
 
 # anki-importer-pro
 
+https://ankiweb.net/shared/info/1198302536
+
 This is a text import plugin with functionality similar to Anki's built-in import feature, but with the following new capabilities:
 
 - Supports direct text input, eliminating the need to save temporary snippets as CSV files before importing
